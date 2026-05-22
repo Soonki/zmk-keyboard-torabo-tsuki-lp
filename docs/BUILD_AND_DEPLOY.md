@@ -24,22 +24,25 @@ git push origin master
 
 ## 1. ビルドの起動方法
 
-ビルドワークフロー（`.github/workflows/build.yml`）は **push / pull_request / 手動** で起動します。
+ビルドワークフロー（`.github/workflows/build.yml`）は **push / pull_request / 手動（workflow_dispatch）** に対応しています。
 
-### A. 通常運用（push で自動ビルド）
+> ⚠️ **fork の注意**: GitHub の仕様で、**fork したリポジトリでは push/PR による自動ビルドがデフォルトで無効**です（`workflow_dispatch` による手動ビルドは動作します）。
+> push で自動ビルドしたい場合は、**一度だけ**下記の有効化が必要です（[2.5 push自動ビルドの有効化](#25-push-自動ビルドの有効化一度だけ) 参照）。
 
-キーマップや設定を変更して push するだけでビルドが走ります。
+### A. 手動ビルド（推奨・確実）
+
+```bash
+gh workflow run "Build ZMK firmware" --repo Soonki/zmk-keyboard-torabo-tsuki-lp --ref master
+```
+
+### B. push で自動ビルド（事前に 2.5 の有効化が必要）
+
+キーマップや設定を変更して push するとビルドが走ります。
 
 ```bash
 git add -A
 git commit -m "keymap: 〇〇を変更"
 git push origin master
-```
-
-### B. 手動起動（変更なしでビルドしたいとき）
-
-```bash
-gh workflow run "Build ZMK firmware" --repo Soonki/zmk-keyboard-torabo-tsuki-lp --ref master
 ```
 
 ### ビルド状況の確認
@@ -48,6 +51,19 @@ gh workflow run "Build ZMK firmware" --repo Soonki/zmk-keyboard-torabo-tsuki-lp 
 gh run list  --repo Soonki/zmk-keyboard-torabo-tsuki-lp --limit 5
 gh run watch <RUN_ID> --repo Soonki/zmk-keyboard-torabo-tsuki-lp   # 完了まで監視
 ```
+
+---
+
+### 2.5 push 自動ビルドの有効化（一度だけ）
+
+fork では push 自動ビルドが無効なため、以下を **一度だけ** 実施すると有効になります（ブラウザ操作）。
+
+1. <https://github.com/Soonki/zmk-keyboard-torabo-tsuki-lp/actions> を開く。
+2. 「**Workflows aren't being run on this forked repository**」というバナーが出るので
+   「**I understand my workflows, go ahead and enable them**」ボタンを押す。
+3. 以降、`git push origin master` で自動的にビルドが走るようになる。
+
+> これを行わなくても、手動ビルド（[1-A](#a-手動ビルド推奨確実)）でいつでもビルドできます。
 
 ---
 
