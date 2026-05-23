@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>torabo-tsuki LP (S) キーマップ 一覧</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; padding: 20px;
+    font-family: "Segoe UI", "Hiragino Kaku Gothic ProN", "Yu Gothic UI", Meiryo, sans-serif;
+    background: #f5f6f8; color: #1f2937;
+  }
+  .sheet {
+    max-width: 900px; margin: 0 auto; background: #fff;
+    border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 22px;
+  }
+  .head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  h1 { font-size: 19px; margin: 0; }
+  .sub { color: #6b7280; font-size: 12px; margin: 2px 0 0; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 8px 0 14px; font-size: 11.5px; color: #6b7280; }
+  .legend span { display: inline-flex; align-items: center; gap: 5px; }
+  .sw { width: 12px; height: 12px; border-radius: 3px; border: 1px solid rgba(0,0,0,.15); }
+  .layer { margin: 0 0 12px; break-inside: avoid; page-break-inside: avoid; }
+  .layer h2 { font-size: 14px; margin: 0 0 1px; }
+  .layer .ld { font-size: 11px; color: #6b7280; margin: 0 0 4px; }
+  svg { width: 100%; height: auto; display: block; }
+  .note { font-size: 12px; color: #4b5563; background: #f3f4f6; border-radius: 8px; padding: 8px 12px; margin: 6px 0 0; }
+  .btn {
+    border: 1px solid #2563eb; background: #2563eb; color: #fff; cursor: pointer;
+    padding: 7px 14px; border-radius: 8px; font-size: 13px;
+  }
+  @media print {
+    @page { size: A4 portrait; margin: 7mm; }
+    body { padding: 0; background: #fff; }
+    .sheet { max-width: none; border: none; border-radius: 0; padding: 0; }
+    .noprint { display: none !important; }
+    h1 { font-size: 15px; }
+    .layer { margin-bottom: 4px; }
+    .layer h2 { font-size: 12px; margin-bottom: 0; }
+    .layer .ld { font-size: 9.5px; margin: 0 0 2px; }
+    .layer svg { max-width: 66%; margin: 0 auto; }
+    .legend { font-size: 9px; gap: 8px; margin: 3px 0 6px; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <div class="head">
+    <div>
+      <h1>torabo-tsuki LP（Sサイズ）キーマップ一覧</h1>
+      <p class="sub">物理配置を忠実再現（親指の傾き含む）・F/J の ● = ホームポジション・全角/半角 = 親指 かな／英数（タップ）</p>
+    </div>
+    <button class="btn noprint" onclick="window.print()">🖨 印刷 / PDF保存</button>
+  </div>
+
+  <div class="legend" id="legend"></div>
+  <div id="layers"></div>
+
+  <p class="note noprint">
+    タップ/ホールド兼用キーは <b>上=タップ / 下=ホールド</b>。透過（—）は下位レイヤーのキーが効きます。
+  </p>
+</div>
+
+<script>
+// ===== Sサイズ 物理配置（physical_layout_s, w=h=100, rは度, rx/ry=回転中心） =====
+const K = [
+  {x:0,y:60},{x:100,y:25},{x:200,y:0},{x:300,y:13},{x:400,y:25},
+  {x:950,y:25},{x:1050,y:13},{x:1150,y:0},{x:1250,y:25},{x:1350,y:60},
+  {x:0,y:160},{x:100,y:125},{x:200,y:100},{x:300,y:113},{x:400,y:125},
+  {x:950,y:125},{x:1050,y:113},{x:1150,y:100},{x:1250,y:125},{x:1350,y:160},
+  {x:0,y:260},{x:100,y:225},{x:200,y:200},{x:300,y:213},{x:400,y:225},{x:500,y:240},
+  {x:850,y:240},{x:950,y:225},{x:1050,y:213},{x:1150,y:200},{x:1250,y:225},{x:1350,y:260},
+  {x:0,y:360},{x:100,y:325},{x:200,y:300},{x:315,y:350},
+  {x:420,y:350,r:10,rx:420,ry:450},{x:522,y:371,r:20,rx:525,ry:470},
+  {x:828,y:371,r:-20,rx:925,ry:470},{x:930,y:350,r:-10,rx:1030,ry:450},
+  {x:1035,y:350},{x:1150,y:300},{x:1250,y:325},{x:1350,y:360}
+];
+
+const CAT = {
+  a: {fill:'#e8f5e9', stroke:'#66bb6a', ink:'#1b5e20', name:'英字'},
+  s: {fill:'#e3f2fd', stroke:'#42a5f5', ink:'#0d47a1', name:'数字・記号'},
+  m: {fill:'#eceff1', stroke:'#90a4ae', ink:'#37474f', name:'修飾'},
+  k: {fill:'#e0f2f1', stroke:'#26a69a', ink:'#004d40', name:'動作(Space/Enter/F/矢印)'},
+  t: {fill:'#f3e5f5', stroke:'#ab47bc', ink:'#4a148c', name:'親指(タップ/ホールド)'},
+  x: {fill:'#fff3e0', stroke:'#fb8c00', ink:'#e65100', name:'マウス・スクロール'},
+  _: {fill:'#fafafa', stroke:'#e5e7eb', ink:'#cbd5e1', name:'透過(—)'}
+};
+
+const T = '—';
+function fill(n){ const a=[]; for(let i=0;i<n;i++)a.push({t:T,c:'_'}); return a; }
+
+const L = {
+  0: [
+    {t:'Q',c:'a'},{t:'W',c:'a'},{t:'E',c:'a'},{t:'R',c:'a'},{t:'T',c:'a'},
+    {t:'Y',c:'a'},{t:'U',c:'a'},{t:'I',c:'a'},{t:'O',c:'a'},{t:'P',c:'a'},
+    {t:'A',c:'a'},{t:'S',c:'a'},{t:'D',c:'a'},{t:'F',c:'a',home:1},{t:'G',c:'a'},
+    {t:'H',c:'a'},{t:'J',c:'a',home:1},{t:'K',c:'a'},{t:'L',c:'a'},{t:';',c:'s'},
+    {t:'Z',c:'a'},{t:'X',c:'a'},{t:'C',c:'a'},{t:'V',c:'a'},{t:'B',c:'a'},{t:'Space',c:'k'},
+    {t:'Enter',c:'k'},{t:'N',c:'a'},{t:'M',c:'a'},{t:',',c:'s'},{t:'.',c:'s'},{t:'/',b:'RSft',c:'t'},
+    {t:'Ctrl',c:'m'},{t:'Gui',c:'m'},{t:'Alt',c:'m'},{t:'BSpc',c:'k'},{t:'Space',b:'L2',c:'t'},{t:'かな',b:'LSft',c:'t'},
+    {t:'英数',b:'RSft',c:'t'},{t:'Enter',b:'L3',c:'t'},{t:'BSpc',c:'k'},{t:'Alt',c:'m'},{t:'Gui',c:'m'},{t:'Ctrl',c:'m'}
+  ],
+  1: (()=>{ const a=fill(44);
+    a[12]={t:'右クリック',c:'x'}; a[13]={t:'左クリック',c:'x'};
+    a[16]={t:'左クリック',c:'x'}; a[17]={t:'右クリック',c:'x'};
+    a[18]={t:'スクロール',c:'x'}; return a; })(),
+  2: [
+    {t:'!',c:'s'},{t:'@',c:'s'},{t:'#',c:'s'},{t:'$',c:'s'},{t:'%',c:'s'},
+    {t:'^',c:'s'},{t:'&',c:'s'},{t:'*',c:'s'},{t:'(',c:'s'},{t:')',c:'s'},
+    {t:'1',c:'s'},{t:'2',c:'s'},{t:'3',c:'s'},{t:'4',c:'s'},{t:'5',c:'s'},
+    {t:'{',c:'s'},{t:'-',c:'s'},{t:'=',c:'s'},{t:'}',c:'s'},{t:':',c:'s'},
+    {t:'6',c:'s'},{t:'7',c:'s'},{t:'8',c:'s'},{t:'9',c:'s'},{t:'0',c:'s'},{t:T,c:'_'},
+    {t:T,c:'_'},{t:'_',c:'s'},{t:'+',c:'s'},{t:'[',c:'s'},{t:']',c:'s'},{t:'\\',c:'s'},
+    {t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},
+    {t:'Tab',c:'k'},{t:'Del',c:'k'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'}
+  ],
+  3: [
+    {t:'F1',c:'k'},{t:'F2',c:'k'},{t:'F3',c:'k'},{t:'F4',c:'k'},{t:'F5',c:'k'},
+    {t:'Home',c:'k'},{t:'PgUp',c:'k'},{t:'PgDn',c:'k'},{t:'End',c:'k'},{t:'Esc',c:'k'},
+    {t:'F6',c:'k'},{t:'F7',c:'k'},{t:'F8',c:'k'},{t:'F9',c:'k'},{t:'F10',c:'k'},
+    {t:'←',c:'k'},{t:'↓',c:'k'},{t:'↑',c:'k'},{t:'→',c:'k'},{t:'Tab',c:'k'},
+    {t:'F11',c:'k'},{t:'F12',c:'k'},{t:'USB',c:'k'},{t:'BLE',c:'k'},{t:'BT▶',c:'k'},{t:T,c:'_'},
+    {t:T,c:'_'},{t:"'",c:'s'},{t:'"',c:'s'},{t:'`',c:'s'},{t:'~',c:'s'},{t:'|',c:'s'},
+    {t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:'Del',c:'k'},{t:'Tab',c:'k'},{t:T,c:'_'},
+    {t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'},{t:T,c:'_'}
+  ]
+};
+
+const META = [
+  {n:'Layer 0 — ベース', d:'通常入力（上段がQWERTY、数字行なし）。全角/半角は親指の かな・英数 をタップ。'},
+  {n:'Layer 1 — マウス（ボールを動かすと自動有効）', d:'D/F・J/K=クリック、L=スクロール呼び出し。750ms無操作で解除。'},
+  {n:'Layer 2 — 記号・数字（左親指 Space をホールド）', d:'BTクリアは F+G 同時押し。'},
+  {n:'Layer 3 — F・ナビ（右親指 Enter をホールド）', d:'右手側に矢印（←↓↑→）。USB/BLE=出力切替、BT▶=次のBT。'}
+];
+
+const KW = 100, GAP = 8;
+function fontSize(s){ const n=[...s].length; if(n<=2)return 30; if(n<=3)return 22; if(n<=4)return 18; if(n<=5)return 15; return 12; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function drawLayer(idx){
+  const legends = L[idx];
+  let out = '<svg viewBox="-15 -15 1480 525" aria-label="layer">';
+  for (let i=0;i<44;i++){
+    const k = K[i], lg = legends[i], cat = CAT[lg.c] || CAT._;
+    const cx = k.x + KW/2, cy = k.y + KW/2;
+    const g = (k.r ? `transform="rotate(${k.r} ${k.rx} ${k.ry})"` : '');
+    out += `<g ${g}>`;
+    out += `<rect x="${k.x+GAP/2}" y="${k.y+GAP/2}" width="${KW-GAP}" height="${KW-GAP}" rx="12" fill="${cat.fill}" stroke="${cat.stroke}" stroke-width="2"/>`;
+    if (lg.b){
+      out += `<text x="${cx}" y="${cy-8}" text-anchor="middle" dominant-baseline="middle" font-size="${fontSize(lg.t)*0.8}" fill="${cat.ink}" font-weight="600">${esc(lg.t)}</text>`;
+      out += `<text x="${cx}" y="${cy+18}" text-anchor="middle" dominant-baseline="middle" font-size="13" fill="${cat.ink}" opacity="0.7">${esc(lg.b)}</text>`;
+    } else {
+      out += `<text x="${cx}" y="${cy}" text-anchor="middle" dominant-baseline="middle" font-size="${fontSize(lg.t)}" fill="${cat.ink}" font-weight="600">${esc(lg.t)}</text>`;
+    }
+    if (lg.home){ out += `<circle cx="${cx}" cy="${k.y+KW-14}" r="4.5" fill="${cat.stroke}"/>`; }
+    out += `</g>`;
+  }
+  out += '</svg>';
+  return out;
+}
+
+// 凡例
+const legend = document.getElementById('legend');
+['a','s','m','k','t','x','_'].forEach(c=>{
+  const el = document.createElement('span');
+  el.innerHTML = `<span class="sw" style="background:${CAT[c].fill};border-color:${CAT[c].stroke}"></span>${CAT[c].name}`;
+  legend.appendChild(el);
+});
+
+// 全レイヤー描画
+const host = document.getElementById('layers');
+[0,1,2,3].forEach(idx=>{
+  const div = document.createElement('div');
+  div.className = 'layer';
+  div.innerHTML = `<h2>${esc(META[idx].n)}</h2><p class="ld">${esc(META[idx].d)}</p>${drawLayer(idx)}`;
+  host.appendChild(div);
+});
+</script>
+</body>
+</html>
