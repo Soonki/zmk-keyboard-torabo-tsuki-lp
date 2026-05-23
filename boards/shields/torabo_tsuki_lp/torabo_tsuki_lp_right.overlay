@@ -2,8 +2,16 @@
 #include <input/processors.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
 
+&zip_temp_layer {
+    // タイピング直後150msはポインタ移動でマウスレイヤーを起動しない（誤爆防止）
+    require-prior-idle-ms = <150>;
+};
+
 &pointing_listener {
-    input-processors = <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>;
+    // ポインタ移動でlayer_1を自動有効化し、750ms無操作で自動解除（オートマウスレイヤー）
+    input-processors =
+        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+        <&zip_temp_layer 1 750>;
 };
 
 &size_s_transform {
