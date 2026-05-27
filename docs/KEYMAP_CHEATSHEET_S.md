@@ -19,11 +19,11 @@
 - `/※` = `&mt RIGHT_SHIFT FSLH`（タップ=`/`、ホールド=右Shift）
 - `L2/Spc` = `&lt 2 SPACE`（タップ=Space、ホールド=Layer 2）
 - `L3/Ent` = `&lt 3 ENTER`（タップ=Enter、ホールド=Layer 3）
-- `かな/LSft` = `&mt LEFT_SHIFT LANGUAGE_1`（タップ=かな/日本語入力、ホールド=左Shift）
-- `英数/RSft` = `&mt RSHIFT LANGUAGE_2`（タップ=英数/英語入力、ホールド=右Shift）
+- `かな/LSft` = `&mt LEFT_SHIFT LANG1`（タップ=IME ON/日本語入力、ホールド=左Shift）
+- `英数/RSft` = `&mt RSHIFT LANG2`（タップ=IME OFF/英数入力、ホールド=右Shift）
 - `LSft` = 左Shift（旧 `LGui` の位置を変更）。S実機の最下段は **Ctrl → Shift → Alt** の並び。
 
-> **全角/半角（日本語⇄英語）切替**: 左親指内側 `かな`（タップ）／右親指内側 `英数`（タップ）。
+> **IME ON/OFF（日本語⇄英数）切替**: 左親指内側 `かな`（タップ）／右親指内側 `英数`（タップ）。
 
 ---
 
