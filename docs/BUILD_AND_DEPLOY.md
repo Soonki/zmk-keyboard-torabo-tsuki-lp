@@ -135,6 +135,42 @@ gh run download <RUN_ID> --repo Soonki/zmk-keyboard-torabo-tsuki-lp -D firmware
 
 ---
 
+## 6. DYA Studio での実機調整
+
+このファームウェアは [**DYA Studio**](https://studio.dya.cormoran.works/)（cormoran 氏による ZMK Studio フォーク）に対応しています。
+標準の ZMK Studio と同じキーマップ編集に加え、**再ビルド無しで実機のトラックボール挙動とスリープ設定を調整**できます。
+
+### 使えること
+
+| 機能 | 内容 |
+|------|------|
+| キーマップ/レイヤー編集 | 標準 ZMK Studio と同様（従来どおり） |
+| トラックボール実機調整 | 移動速度（scale）/ 回転角 / 軸反転 / 軸スナップ / XY→スクロール変換を実機上で調整 |
+| スリープ/アイドル設定 | スリープ・アイドルタイムアウトを遠隔変更 |
+
+### 仕組み（なぜフォークが必要か）
+
+DYA Studio の実機調整は cormoran 独自の Studio RPC プロトコル拡張を使うため、
+公式 ZMK ではなく **cormoran の ZMK フォーク**（`config/west.yml` の `zmk` = `cormoran/zmk@v0.3-branch+dya`）と、
+2 つのモジュール（`zmk-module-runtime-input-processor` / `zmk-module-settings-rpc`）を使用しています。
+zephyr ベースは公式 v0.3 と同一（`v3.5.0+zmk-fixes`）です。
+
+これらの独自機能は **central（PC に接続する側）専用**で有効化しています（`snippets/split-central/split-central.conf`）。
+peripheral 側では有効化されません（USB Studio が無いため）。
+
+### 使い方
+
+1. `central` 側のファームウェアを書き込んだキーボードを **USB で PC に接続**する。
+2. **Chrome / Edge** で <https://studio.dya.cormoran.works/> を開く。
+3. 「Connect」→ **Web Serial**（USB）でデバイスを選択して接続。
+4. トラックボール調整・スリープ設定・キーマップの各パネルから変更すると、即座に実機へ反映される。
+
+> ⚠️ **DYA Studio / ZMK Studio での変更はこのリポジトリのソースには自動反映されません。**
+> 恒久化したい調整値（速度・回転など）は、`boards/shields/torabo_tsuki_lp/torabo_tsuki_lp_{left,right}.overlay` の
+> `&mouse_runtime_input_processor` の初期値（`scale-multiplier` / `scale-divisor` / `rotation-degrees` 等）を手で書き換えて push してください。
+
+---
+
 ## 補足: ローカルビルド（任意）
 
 通常は GitHub Actions で十分ですが、オフラインで高速に回したい場合は west + Zephyr SDK でローカルビルドも可能です（WSL / Docker 推奨）。必要になったら別途セットアップします。
