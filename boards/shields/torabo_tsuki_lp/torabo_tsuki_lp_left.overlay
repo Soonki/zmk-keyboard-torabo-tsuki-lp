@@ -1,6 +1,14 @@
 #include "torabo_tsuki_lp.dtsi"
 #include <input/processors.dtsi>
+#include <input/processors/runtime-input-processor.dtsi>
 #include <dt-bindings/zmk/input_transform.h>
+
+&mouse_runtime_input_processor {
+    // DYA Studio から速度(scale)/回転(rotation)/軸スナップ等を再ビルド無しで実機調整できる。
+    // 既定値は従来の zip_xy_transform(X/Y反転) 相当。調整値はStudioのみ保持されソースには戻らない。
+    x-invert;
+    y-invert;
+};
 
 &zip_temp_layer {
     // タイピング直後150msはポインタ移動でマウスレイヤーを起動しない（誤爆防止）
@@ -8,9 +16,9 @@
 };
 
 &pointing_listener {
-    // ポインタ移動でlayer_1を自動有効化し、750ms無操作で自動解除（オートマウスレイヤー）
+    // ポインタ移動を runtime processor で処理（DYA Studioで調整可）→ layer_1自動有効化・750ms無操作で解除
     input-processors =
-        <&zip_xy_transform (INPUT_TRANSFORM_X_INVERT | INPUT_TRANSFORM_Y_INVERT)>,
+        <&mouse_runtime_input_processor>,
         <&zip_temp_layer 1 750>;
 
     // layer_4 が有効な間だけ、移動を1/6に減速してスクロールへ変換（ホールド式スクロール）
