@@ -11,16 +11,20 @@ manifest:
     # Studio RPC プロトコル拡張を使うため、公式 zmk ではなく cormoran のフォークを使用。
     # v0.3-branch+dya は dya-dash 実機が使う統合ブランチで、zephyr ベースは
     # zmkfirmware/v3.5.0+zmk-fixes（公式 v0.3 と同一）。違いは独自 zmk-studio-messages のみ。
+    # NOTE: cormoran は main/ブランチ追従だと west update が新しいコードを引き、
+    # ZMK 本体と runtime-input-processor の API 不整合(zmk_keymap_layer_activate
+    # の引数数)で central 構成のビルドが壊れる。最後にビルド成功した 2026-05-29
+    # 時点の commit SHA に固定する。
     - name: zmk
       remote: cormoran
-      revision: v0.3-branch+dya
+      revision: 4493783ef88ce2e653bf8217c92ee17140df71e3
       import: app/west.yml
     - name: zmk-module-runtime-input-processor
       remote: cormoran
-      revision: main
+      revision: e643dfe30754495c875b19097832378faed26f24
     - name: zmk-module-settings-rpc
       remote: cormoran
-      revision: main
+      revision: ad1c995cf910ca989ecd6352a1d0b41ccb18362c
     - name: zmk-component-bmp-boost
       remote: sekigon-gonnoc
       import: west.yml
