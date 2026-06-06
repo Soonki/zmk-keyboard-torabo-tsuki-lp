@@ -8,3 +8,9 @@
 # west ローカルワークスペース(ローカルビルド時のみ生成)
 /.west/
 /build/
+
+# keymap backup/editor app local outputs
+/tools/keymap-backup/node_modules/
+/tools/keymap-backup/dist/
+/tools/keymap-backup/coverage/
+/tools/keymap-backup/dev-server.*
