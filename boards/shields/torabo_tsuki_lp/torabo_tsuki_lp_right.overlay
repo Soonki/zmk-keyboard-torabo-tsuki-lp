@@ -14,7 +14,7 @@
     // タイピング直後150msはポインタ移動でマウスレイヤーを起動しない（誤爆防止）
     require-prior-idle-ms = <150>;
     // マウス操作キーだけは押下してもオートマウスレイヤーを維持する。
-    excluded-positions = <18 19 30 31 32 33 34 35>;
+    excluded-positions = <16 17 18 19 30 31 32 33 34 35>;
 };
 
 &pointing_listener {
