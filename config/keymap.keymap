@@ -14,6 +14,49 @@
             layers = <2>;
         };
 
+        // === マウス操作コンボ（右手ホームロー隣接） ===
+        // timeout-ms を短く、require-prior-idle-ms でタイピング直後の誤爆を防止
+
+        // 左クリック：J + K
+        combo_lclk {
+            bindings = <&mkp LCLK>;
+            key-positions = <33 34>;
+            timeout-ms = <40>;
+            require-prior-idle-ms = <125>;
+        };
+
+        // 右クリック：K + L
+        combo_rclk {
+            bindings = <&mkp RCLK>;
+            key-positions = <34 35>;
+            timeout-ms = <40>;
+            require-prior-idle-ms = <125>;
+        };
+
+        // オートマウス トグル：H + L（layer_5 を ON/OFF。ON中だけトラックボール移動でマウスレイヤー自動起動）
+        combo_automouse {
+            bindings = <&tog 5>;
+            key-positions = <32 35>;
+            timeout-ms = <50>;
+            require-prior-idle-ms = <125>;
+        };
+
+        // 戻る（MB4）：N + M
+        combo_back {
+            bindings = <&mkp MB4>;
+            key-positions = <46 47>;
+            timeout-ms = <40>;
+            require-prior-idle-ms = <125>;
+        };
+
+        // 進む（MB5）：, + .
+        combo_fwd {
+            bindings = <&mkp MB5>;
+            key-positions = <48 49>;
+            timeout-ms = <40>;
+            require-prior-idle-ms = <125>;
+        };
+
     };
 
     macros {
@@ -41,16 +84,16 @@
                 &kp TAB   &kp Q     &kp W     &kp E     &kp R     &kp T     &kp Y     &kp U     &kp I     &kp O     &kp P     &kp BSPC
                 &kp CAPS   &kp A      &kp S      &kp D      &kp F      &kp G      &mkp LCLK  &mkp RCLK  &kp H      &kp J      &kp K      &kp L      &kp SEMI   &kp SQT
                 &kp LSHFT       &kp Z           &kp X           &kp C           &kp V           &kp B           &kp SPACE       &kp ENTER       &kp N           &kp M           &kp COMMA       &kp DOT         &mt RSHFT FSLH  &kp RSHFT
-                &kp LCTRL            &kp LCTRL            &kp LGUI             &kp LALT             &kp BSPC             &lt 2 SPACE          &mt LSHFT LC(SPACE)  &mt RSHFT RC(SPACE)  &lt 3 ENTER          &kp BSPC             &kp RALT             &kp RGUI             &kp RCTRL            &kp RCTRL
+                &kp LCTRL            &kp LCTRL            &kp LGUI             &kp LALT             &kp BSPC             &lt 2 SPACE          &mt LSHFT LC(SPACE)  &lt 2 RC(SPACE)  &lt 3 ENTER          &kp BSPC             &kp RALT             &kp RGUI             &kp RCTRL            &kp RCTRL
             >;
         };
 
         layer_1 {
             bindings = <
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
-                &trans     &trans     &trans     &trans     &trans     &trans     &mkp MB5   &mkp MCLK  &trans     &trans     &trans     &trans
-                &trans     &trans     &trans     &trans     &trans     &trans     &trans     &trans     &mkp MB4   &mkp LCLK  &mkp RCLK  &mo 4      &trans     &trans
-                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp LCLK  &mkp RCLK  &mo 4  &mkp MB4  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &mkp MB5  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
             >;
         };
@@ -59,9 +102,9 @@
             bindings = <
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                 &trans      &kp LS(N1)  &kp LS(N2)  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)  &kp LS(N6)  &kp LS(N7)  &kp LS(N8)  &kp LS(N9)  &kp LS(N0)  &trans
-                &trans        &kp N1        &kp N2        &kp N3        &kp N0        &trans        &trans        &trans        &kp LS(LBKT)  &kp MINUS     &kp EQUAL     &kp LS(RBKT)  &kp LS(SEMI)  &trans
-                &trans         &kp N4         &kp N5         &kp N6         &trans         &trans         &trans         &lgtm          &kp LS(MINUS)  &kp LS(EQUAL)  &kp LBKT       &kp RBKT       &kp BSLH       &trans
-                &trans   &kp N7   &kp N8   &kp N9   &trans   &trans   &trans   &trans   &kp TAB  &kp DEL  &trans   &trans   &trans   &trans
+                &trans  &kp N1  &kp N2  &kp N3  &kp N0  &trans  &trans  &trans  &kp LS(LBKT)  &kp MINUS  &kp EQUAL  &kp LS(RBKT)  &kp LS(SEMI)  &trans
+                &trans  &kp N4  &kp N5  &kp N6  &trans  &trans  &trans  &lgtm  &kp LS(MINUS)  &kp LS(EQUAL)  &kp LBKT  &kp RBKT  &kp BSLH  &trans
+                &trans  &kp N7  &kp N8  &kp N9  &trans  &trans  &trans  &trans  &kp TAB  &kp DEL  &trans  &trans  &trans  &trans
             >;
         };
 
@@ -76,6 +119,19 @@
         };
 
         layer_4 {
+            bindings = <
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+                &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
+            >;
+        };
+
+        // オートマウス有効フラグ用レイヤー（&tog 5 でON/OFF）。
+        // このレイヤーがONの間だけ pointing_listener の automouse override が働く。
+        // キー自体は全て透過（下位レイヤーのキーがそのまま使える）。
+        layer_5 {
             bindings = <
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans
                 &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans  &trans

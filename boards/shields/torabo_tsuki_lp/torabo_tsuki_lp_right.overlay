@@ -18,15 +18,23 @@
 };
 
 &pointing_listener {
-    // ポインタ移動を runtime processor で処理（DYA Studioで調整可）→ layer_1自動有効化・400ms無操作で解除
-    input-processors =
-        <&mouse_runtime_input_processor>,
-        <&zip_temp_layer 1 400>;
+    // 既定はオートマウスOFF：ポインタ移動を runtime processor で処理するだけ（レイヤーは自動起動しない）。
+    // DYA Studio で速度/回転を調整可。オートマウスは下の automouse override（layer_5 ON時のみ）で復活させる。
+    input-processors = <&mouse_runtime_input_processor>;
 
     // layer_4 が有効な間だけ、移動を1/6に減速してスクロールへ変換（ホールド式スクロール）
+    // ※ 最初にマッチした override が優先されるため、automouse より先に置いてスクロールを優先する
     scroller {
         layers = <4>;
         input-processors = <&zip_xy_scaler 1 6>, <&zip_xy_to_scroll_mapper>;
+    };
+
+    // オートマウス トグルON（layer_5）の間だけ従来動作：移動で layer_1 を自動有効化・400ms無操作で解除
+    automouse {
+        layers = <5>;
+        input-processors =
+            <&mouse_runtime_input_processor>,
+            <&zip_temp_layer 1 400>;
     };
 };
 
