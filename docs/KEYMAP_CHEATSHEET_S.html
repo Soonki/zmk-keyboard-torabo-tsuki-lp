@@ -373,11 +373,6 @@
       --combo-color: var(--violet);
     }
 
-    .link-l-semi {
-      --lx: 89.655%; --ly: 35%; --lw: 7.31%; --lr: 19.3deg; --counter: -19.3deg;
-      --combo-color: var(--amber);
-    }
-
     .link-comma-dot {
       --lx: 82.759%; --ly: 50%; --lw: 7.11%; --lr: 14deg; --counter: -14deg;
       --combo-color: var(--red);
@@ -598,7 +593,7 @@
           <div class="key p0">Q</div><div class="key p1">W</div><div class="key p2">E</div><div class="key p3">R</div><div class="key p4">T</div>
           <div class="key p5">Y</div><div class="key p6">U</div><div class="key p7">I</div><div class="key p8">O</div><div class="key p9">P</div>
           <div class="key p10">A</div><div class="key p11">S</div><div class="key p12">D</div><div class="key p13">F</div><div class="key p14">G</div>
-          <div class="key p15 combo-key">H</div><div class="key p16 combo-key">J</div><div class="key p17 combo-key">K</div><div class="key p18 combo-key">L</div><div class="key p19 combo-key">;</div>
+          <div class="key p15 combo-key">H</div><div class="key p16 combo-key">J</div><div class="key p17 combo-key">K</div><div class="key p18 combo-key">L</div><div class="key p19 layer-key">;<small>hold Scroll</small></div>
           <div class="key p20">Z</div><div class="key p21">X</div><div class="key p22">C</div><div class="key p23">V</div><div class="key p24">B</div><div class="key p25 layer-key">Codex<small>hold L1</small></div>
           <div class="key p26">Enter</div><div class="key p27">N</div><div class="key p28">M</div><div class="key p29 combo-key">,</div><div class="key p30 combo-key">.</div><div class="key p31 mod-key">/<small>hold RSft</small></div>
           <div class="key p32 mod-key">LCtrl</div><div class="key p33 mod-key">LGui</div><div class="key p34 mod-key">LAlt</div><div class="key p35">Bspc</div>
@@ -609,7 +604,6 @@
           <div class="combo-link link-hj"><span>戻る</span></div>
           <div class="combo-link link-jk"><span>左Click</span></div>
           <div class="combo-link link-kl"><span>右Click</span></div>
-          <div class="combo-link link-l-semi"><span>Scroll</span></div>
           <div class="combo-link link-comma-dot"><span>進む</span></div>
         </div>
       </div>
@@ -620,10 +614,10 @@
         <span style="--legend-color: var(--violet-soft)">修飾／IME</span>
       </div>
 
-      <div class="scroll-flow" aria-label="ワンショットスクロールの手順">
-        <div class="flow-step" data-step="1"><b>L ＋ ; を一度タップ</b>両キーから手を離す</div>
-        <div class="flow-step" data-step="2"><b>ボールを動かす</b>上下＝縦、左右＝横スクロール</div>
-        <div class="flow-step" data-step="3"><b>キー／左クリックで解除</b>次の通常キー、または J ＋ K まで時間制限なし</div>
+      <div class="scroll-flow" aria-label="ホールドスクロールの手順">
+        <div class="flow-step" data-step="1"><b>; を140msホールド</b>タップ時は通常の ; を入力</div>
+        <div class="flow-step" data-step="2"><b>押したままボール移動</b>上下＝縦、左右＝横スクロール</div>
+        <div class="flow-step" data-step="3"><b>; を放して解除</b>即座に通常カーソルへ戻る</div>
       </div>
     </section>
 
@@ -727,9 +721,9 @@
       <table class="quick-table">
         <thead><tr><th>動作</th><th>操作</th></tr></thead>
         <tbody>
-          <tr><td>左クリック／ドラッグ</td><td><kbd>J</kbd> ＋ <kbd>K</kbd>／押したままボール移動。スクロール中は先にスクロール解除</td></tr>
+          <tr><td>左クリック／ドラッグ</td><td><kbd>J</kbd> ＋ <kbd>K</kbd>／押したままボール移動</td></tr>
           <tr><td>右クリック</td><td><kbd>K</kbd> ＋ <kbd>L</kbd></td></tr>
-          <tr><td>スクロール</td><td><kbd>L</kbd> ＋ <kbd>;</kbd> を一度タップしてボール移動（次の通常キー、または左クリックまで時間制限なし）</td></tr>
+          <tr><td>スクロール</td><td><kbd>;</kbd> を140msホールドしながらボール移動（放すと即解除）</td></tr>
           <tr><td>戻る／進む</td><td><kbd>H</kbd> ＋ <kbd>J</kbd> ／ <kbd>,</kbd> ＋ <kbd>.</kbd></td></tr>
           <tr><td>IME切替</td><td>左右いずれかの親指 <kbd>IME</kbd> をタップ</td></tr>
           <tr><td>記号・数字</td><td>左 Space/L2、または右 IME/L2 をホールド</td></tr>
