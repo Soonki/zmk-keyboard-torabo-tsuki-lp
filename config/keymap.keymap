@@ -15,7 +15,7 @@
 
         bt_clear {
             bindings = <&bt BT_CLR>;
-            key-positions = <28 29>;
+            key-positions = <13 14>;
             layers = <2>;
         };
 
@@ -25,7 +25,7 @@
         // 左クリック：J + K
         combo_lclk {
             bindings = <&mkp LCLK>;
-            key-positions = <33 34>;
+            key-positions = <16 17>;
             timeout-ms = <40>;
             require-prior-idle-ms = <125>;
         };
@@ -33,7 +33,7 @@
         // 右クリック：K + L
         combo_rclk {
             bindings = <&mkp RCLK>;
-            key-positions = <34 35>;
+            key-positions = <17 18>;
             timeout-ms = <40>;
             require-prior-idle-ms = <125>;
         };
@@ -41,7 +41,7 @@
         // ワンショットスクロール：H + L をタップして有効化、次のキー入力または5秒後に解除
         combo_scroll {
             bindings = <&sl 4>;
-            key-positions = <32 35>;
+            key-positions = <15 18>;
             timeout-ms = <50>;
             require-prior-idle-ms = <125>;
         };
@@ -49,7 +49,7 @@
         // 戻る（MB4）：N + M
         combo_back {
             bindings = <&mkp MB4>;
-            key-positions = <46 47>;
+            key-positions = <27 28>;
             timeout-ms = <40>;
             require-prior-idle-ms = <125>;
         };
@@ -57,7 +57,7 @@
         // 進む（MB5）：, + .
         combo_fwd {
             bindings = <&mkp MB5>;
-            key-positions = <48 49>;
+            key-positions = <29 30>;
             timeout-ms = <40>;
             require-prior-idle-ms = <125>;
         };
