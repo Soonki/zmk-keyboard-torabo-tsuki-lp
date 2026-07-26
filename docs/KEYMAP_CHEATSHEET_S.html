@@ -578,6 +578,7 @@
 
     <nav aria-label="ページ内ナビゲーション">
       <a href="#base">Base + Combo</a>
+      <a href="#codex">Codex</a>
       <a href="#layer2">Layer 2</a>
       <a href="#layer3">Layer 3</a>
       <a href="#quick">早見表</a>
@@ -598,7 +599,7 @@
           <div class="key p5">Y</div><div class="key p6">U</div><div class="key p7">I</div><div class="key p8">O</div><div class="key p9">P</div>
           <div class="key p10">A</div><div class="key p11">S</div><div class="key p12">D</div><div class="key p13">F</div><div class="key p14">G</div>
           <div class="key p15 combo-key">H</div><div class="key p16 combo-key">J</div><div class="key p17 combo-key">K</div><div class="key p18 combo-key">L</div><div class="key p19 combo-key">;</div>
-          <div class="key p20">Z</div><div class="key p21">X</div><div class="key p22">C</div><div class="key p23">V</div><div class="key p24">B</div><div class="key p25">Space</div>
+          <div class="key p20">Z</div><div class="key p21">X</div><div class="key p22">C</div><div class="key p23">V</div><div class="key p24">B</div><div class="key p25 layer-key">Codex<small>hold L1</small></div>
           <div class="key p26">Enter</div><div class="key p27">N</div><div class="key p28">M</div><div class="key p29 combo-key">,</div><div class="key p30 combo-key">.</div><div class="key p31 mod-key">/<small>hold RSft</small></div>
           <div class="key p32 mod-key">LCtrl</div><div class="key p33 mod-key">LGui</div><div class="key p34 mod-key">LAlt</div><div class="key p35">Bspc</div>
           <div class="key p36 layer-key">Space<small>hold L2</small></div><div class="key p37 mod-key">IME<small>hold LSft</small></div>
@@ -622,7 +623,36 @@
       <div class="scroll-flow" aria-label="ワンショットスクロールの手順">
         <div class="flow-step" data-step="1"><b>L ＋ ; を一度タップ</b>両キーから手を離す</div>
         <div class="flow-step" data-step="2"><b>ボールを動かす</b>上下＝縦、左右＝横スクロール</div>
-        <div class="flow-step" data-step="3"><b>キーで解除</b>次の通常キーまで時間制限なし</div>
+        <div class="flow-step" data-step="3"><b>キー／左クリックで解除</b>次の通常キー、または J ＋ K まで時間制限なし</div>
+      </div>
+    </section>
+
+    <section class="panel" id="codex">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Layer 1 · Codex controls</p>
+          <h2>Codex操作</h2>
+        </div>
+        <p class="hint">左手最内側 Codex をホールド</p>
+      </div>
+
+      <div class="board-scroll">
+        <div class="physical-board" aria-label="SレイアウトのCodex操作レイヤー">
+          <div class="key p0 transparent">—</div><div class="key p1 transparent">—</div><div class="key p2 transparent">—</div><div class="key p3 transparent">—</div><div class="key p4 transparent">—</div>
+          <div class="key p5 nav-key">Review</div><div class="key p6 nav-key">Terminal</div><div class="key p7 nav-key">Browser</div><div class="key p8 nav-key">Files</div><div class="key p9 nav-key">Commands</div>
+          <div class="key p10 transparent">—</div><div class="key p11 transparent">—</div><div class="key p12 transparent">—</div><div class="key p13 transparent">—</div><div class="key p14 transparent">—</div>
+          <div class="key p15 nav-key">Back</div><div class="key p16 nav-key">Prev</div><div class="key p17 nav-key">Next</div><div class="key p18 danger-key">Stop</div><div class="key p19 combo-key">Approve</div>
+          <div class="key p20 transparent">—</div><div class="key p21 transparent">—</div><div class="key p22 transparent">—</div><div class="key p23 transparent">—</div><div class="key p24 transparent">—</div><div class="key p25 transparent">—</div>
+          <div class="key p26 nav-key">Find</div><div class="key p27 nav-key">New</div><div class="key p28 nav-key">Model</div><div class="key p29 nav-key">Recent−</div><div class="key p30 nav-key">Recent＋</div><div class="key p31 nav-key">Shortcuts</div>
+          <div class="key p32 transparent">—</div><div class="key p33 transparent">—</div><div class="key p34 transparent">—</div><div class="key p35 transparent">—</div>
+          <div class="key p36 transparent">—</div><div class="key p37 transparent">—</div><div class="key p38 transparent">—</div><div class="key p39 combo-key">Send<small>Enter</small></div>
+          <div class="key p40 nav-key">Dictate</div><div class="key p41 transparent">—</div><div class="key p42 transparent">—</div><div class="key p43 transparent">—</div>
+        </div>
+      </div>
+
+      <div class="note-grid">
+        <div class="note"><b>安全な一時レイヤー</b>左手の <kbd>Codex</kbd> を離すと即座に通常配列へ戻ります。Approveも両手操作になります。</div>
+        <div class="note"><b>ファームウェアなしで試用可能</b>DYA StudioでBaseのSpaceをMomentary Layer 1へ変更し、Layer 1へ同じショートカットを設定できます。</div>
       </div>
     </section>
 
@@ -697,13 +727,14 @@
       <table class="quick-table">
         <thead><tr><th>動作</th><th>操作</th></tr></thead>
         <tbody>
-          <tr><td>左クリック／ドラッグ</td><td><kbd>J</kbd> ＋ <kbd>K</kbd>／押したままボール移動</td></tr>
+          <tr><td>左クリック／ドラッグ</td><td><kbd>J</kbd> ＋ <kbd>K</kbd>／押したままボール移動。スクロール中は先にスクロール解除</td></tr>
           <tr><td>右クリック</td><td><kbd>K</kbd> ＋ <kbd>L</kbd></td></tr>
-          <tr><td>スクロール</td><td><kbd>L</kbd> ＋ <kbd>;</kbd> を一度タップしてボール移動（次の通常キーまで時間制限なし）</td></tr>
+          <tr><td>スクロール</td><td><kbd>L</kbd> ＋ <kbd>;</kbd> を一度タップしてボール移動（次の通常キー、または左クリックまで時間制限なし）</td></tr>
           <tr><td>戻る／進む</td><td><kbd>H</kbd> ＋ <kbd>J</kbd> ／ <kbd>,</kbd> ＋ <kbd>.</kbd></td></tr>
           <tr><td>IME切替</td><td>左右いずれかの親指 <kbd>IME</kbd> をタップ</td></tr>
           <tr><td>記号・数字</td><td>左 Space/L2、または右 IME/L2 をホールド</td></tr>
           <tr><td>Fキー・矢印</td><td>右 Enter/L3 をホールド</td></tr>
+          <tr><td>Codex操作</td><td>左手最内側 <kbd>Codex</kbd> をホールドしながら右手キー</td></tr>
           <tr><td>Bluetoothクリア</td><td>Layer 2で物理キー <kbd>F</kbd> ＋ <kbd>G</kbd></td></tr>
         </tbody>
       </table>

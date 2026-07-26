@@ -12,11 +12,12 @@
 ```
  Q     W     E     R     T    │    Y     U     I     O     P
  A     S     D     F     G    │    H     J     K     L     ;
- Z     X     C     V     B   Spc │ Ent   N     M     ,     .     /※
+ Z     X     C     V     B  Codex│ Ent   N     M     ,     .     /※
         LCtl  LGui  LAlt  BSpc  L2/Spc  IME/LSft │ IME/L2  L3/Ent  BSpc  RAlt  RGui  RCtl
 ```
 
 - `/※` = `&mt RIGHT_SHIFT FSLH`（タップ=`/`、ホールド=右Shift）
+- `Codex` = `&mo 1`（ホールド中だけCodexレイヤー）
 - `L2/Spc` = `&lt 2 SPACE`（タップ=Space、ホールド=Layer 2）
 - `L3/Ent` = `&lt 3 ENTER`（タップ=Enter、ホールド=Layer 3）
 - 左 `IME/LSft` = `&mt LSHFT LC(SPACE)`（タップ=`左Ctrl+Space`、ホールド=左Shift）
@@ -39,11 +40,28 @@
 - トラックボール移動だけではレイヤーは切り替わりません。
 - 各コンボは直前125ms以内に通常キー入力があると発動しないため、タイピング中の誤爆を抑えます。
 - 左クリックコンボを押したままボールを動かすと、ドラッグや範囲選択ができます。
+- スクロール中に左クリックコンボを押すと、スクロールを解除してから左クリックします。
 - スクロールは次の通常キー入力で解除されます。時間による自動解除はありません。解除時に押した通常キーもそのまま入力されます。
 
-### Layer 1 — 予約
+### Layer 1 — Codex（左手最内側 `Codex` ホールド中）
 
-Layer番号を維持するため残していますが、全キー透過で自動起動もありません。
+```
+ —       —        —        —          —     │  Review   Terminal  Browser  Files    Commands
+ —       —        —        —          —     │  Back     Prev      Next     Stop     Approve
+ —       —        —        —          —     — │  Find     New       Model    Recent−  Recent＋  Shortcuts
+        —        —        —        —       —       —     │    —       Send     Dictate   —        —        —
+```
+
+- `Review` = レビューパネルを開く（`Ctrl+Shift+G`）
+- `Terminal` / `Browser` / `Files` = ターミナル、ブラウザ、ファイルツリーを開く
+- `Commands` = コマンドメニュー（`Ctrl+K`）
+- `Back` = 画面を戻る、`Prev` / `Next` = 前後のチャット
+- `Stop` = 実行停止／承認拒否（`Esc`）、`Approve` = 承認（`Enter`）
+- `Find` = 現在のチャット内検索、`New` = 新規チャット、`Model` = モデル選択
+- `Recent−` / `Recent＋` = 最近使ったチャットを前後移動
+- `Shortcuts` = Codexショートカット一覧（`Ctrl+/`）
+- 右親指の `Send` = Enter、`Dictate` = 音声入力開始（`Ctrl+Shift+D`）
+- マウス操作コンボはLayer 1を対象外にしています。
 
 ---
 
@@ -104,6 +122,7 @@ Layer番号を維持するため残していますが、全キー透過で自動
 | **スクロール** | **`L` + `;` を一度タップしてからボール移動**（次の通常キーで解除、時間制限なし） |
 | 記号・数字 | 左親指 `L2/Spc` をホールド |
 | F キー・矢印 | 右親指 `L3/Ent` をホールド |
+| Codex操作 | 左手最内側 `Codex` をホールドしながら右手キー |
 | Bluetooth切断 | Layer 2 で `F`+`G` 同時押し |
 
 ---
