@@ -5,8 +5,8 @@
 #include <dt-bindings/zmk/pointing.h>
 
 &sl {
-    // ワンショットレイヤーは次のキー入力、または5秒経過で解除
-    release-after-ms = <5000>;
+    // ワンショットレイヤーは次の通常キー入力まで維持（時間による自動解除なし）
+    release-after-ms = <0>;
 };
 
 / {
@@ -38,18 +38,18 @@
             require-prior-idle-ms = <125>;
         };
 
-        // ワンショットスクロール：H + L をタップして有効化、次のキー入力または5秒後に解除
+        // ワンショットスクロール：L + ; をタップして有効化、次の通常キー入力で解除
         combo_scroll {
             bindings = <&sl 4>;
-            key-positions = <15 18>;
+            key-positions = <18 19>;
             timeout-ms = <50>;
             require-prior-idle-ms = <125>;
         };
 
-        // 戻る（MB4）：N + M
+        // 戻る（MB4）：H + J
         combo_back {
             bindings = <&mkp MB4>;
-            key-positions = <27 28>;
+            key-positions = <15 16>;
             timeout-ms = <40>;
             require-prior-idle-ms = <125>;
         };

@@ -1,0 +1,717 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <title>torabo-tsuki LP — S Layout Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f1eee6;
+      --paper: rgba(255, 254, 250, 0.9);
+      --ink: #172126;
+      --muted: #687177;
+      --line: #d7d3c9;
+      --key-top: #fff;
+      --key-bottom: #ece8df;
+      --key-border: #c4bfb4;
+      --teal: #087f78;
+      --teal-soft: #daf3ee;
+      --blue: #2c67a8;
+      --blue-soft: #e3effd;
+      --amber: #a96300;
+      --amber-soft: #ffefc9;
+      --violet: #6952a3;
+      --violet-soft: #eee8ff;
+      --red: #ac3f3f;
+      --red-soft: #ffe6e2;
+      --shadow: 0 18px 48px rgba(35, 42, 44, 0.1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(8, 127, 120, 0.14), transparent 30rem),
+        radial-gradient(circle at 100% 25%, rgba(169, 99, 0, 0.11), transparent 34rem),
+        var(--bg);
+      font-family: "BIZ UDPGothic", "Yu Gothic UI", "Noto Sans JP", system-ui, sans-serif;
+      line-height: 1.6;
+    }
+
+    button, kbd { font: inherit; }
+    h1, h2, p { margin-top: 0; }
+
+    .page {
+      width: min(1220px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 28px 0 64px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px 38px;
+      color: #f7fffd;
+      background: linear-gradient(125deg, #153e43, #0a6f69 58%, #129489);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 270px;
+      height: 270px;
+      right: -76px;
+      top: -130px;
+      border: 42px solid rgba(255,255,255,.08);
+      border-radius: 50%;
+    }
+
+    .eyebrow, .section-label {
+      margin-bottom: 5px;
+      font-size: .74rem;
+      font-weight: 900;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow { color: #b5f0e9; }
+    .section-label { color: var(--teal); }
+
+    h1 {
+      margin-bottom: 8px;
+      font-size: clamp(2rem, 5vw, 3.8rem);
+      line-height: 1.05;
+      letter-spacing: -.045em;
+    }
+
+    .hero-copy {
+      max-width: 780px;
+      margin-bottom: 0;
+      color: rgba(247,255,253,.82);
+      font-weight: 600;
+    }
+
+    .print-button {
+      position: absolute;
+      right: 28px;
+      bottom: 28px;
+      z-index: 2;
+      padding: 9px 14px;
+      color: #143e43;
+      background: #effffb;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow: 0 5px 16px rgba(0,0,0,.15);
+    }
+
+    nav {
+      position: sticky;
+      top: 10px;
+      z-index: 20;
+      display: flex;
+      gap: 6px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 16px auto;
+      padding: 6px;
+      overflow-x: auto;
+      background: rgba(255,254,250,.86);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      box-shadow: 0 10px 26px rgba(35,42,44,.09);
+      backdrop-filter: blur(12px);
+    }
+
+    nav a {
+      flex: 0 0 auto;
+      padding: 7px 12px;
+      color: var(--ink);
+      border-radius: 999px;
+      font-size: .82rem;
+      font-weight: 900;
+      text-decoration: none;
+    }
+
+    nav a:hover { color: var(--teal); background: var(--teal-soft); }
+
+    .panel {
+      margin-top: 18px;
+      padding: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(14px);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+
+    .section-head h2 {
+      margin-bottom: 0;
+      font-size: clamp(1.35rem, 3vw, 2rem);
+      line-height: 1.2;
+    }
+
+    .hint { margin: 0; color: var(--muted); font-size: .88rem; }
+
+    .board-scroll {
+      overflow-x: auto;
+      padding: 10px 4px 18px;
+    }
+
+    .physical-board {
+      position: relative;
+      min-width: 1040px;
+      aspect-ratio: 1450 / 500;
+      overflow: hidden;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.78), rgba(235,232,222,.78)),
+        #faf8f2;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: inset 0 -7px 16px rgba(35,42,44,.06);
+    }
+
+    .physical-board::before {
+      content: "";
+      position: absolute;
+      left: 48.8%;
+      top: 8%;
+      bottom: 7%;
+      width: 1px;
+      background: linear-gradient(transparent, #c9c4b9 18%, #c9c4b9 82%, transparent);
+    }
+
+    .key {
+      position: absolute;
+      z-index: 3;
+      left: calc(var(--x) + .40%);
+      top: calc(var(--y) + 1.15%);
+      display: flex;
+      width: 6.10%;
+      height: 17.70%;
+      padding: 5px 4px 4px;
+      transform: rotate(var(--r, 0deg));
+      transform-origin: var(--ox, 50%) var(--oy, 50%);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      background: linear-gradient(150deg, var(--key-top), var(--key-bottom));
+      border: 1px solid var(--key-border);
+      border-bottom-width: 4px;
+      border-radius: 9px;
+      box-shadow: 0 5px 8px rgba(35,42,44,.09);
+      font-size: clamp(.68rem, 1.1vw, .98rem);
+      font-weight: 900;
+      line-height: 1.05;
+      text-align: center;
+    }
+
+    .key small {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: .57rem;
+      font-weight: 800;
+      line-height: 1.05;
+    }
+
+    .key.combo-key {
+      background: linear-gradient(150deg, #f2fffc, var(--teal-soft));
+      border-color: #8acbc2;
+    }
+
+    .key.layer-key {
+      background: linear-gradient(150deg, #fffaf0, var(--amber-soft));
+      border-color: #d8b873;
+    }
+
+    .key.mod-key {
+      background: linear-gradient(150deg, #f8f5ff, var(--violet-soft));
+      border-color: #baaee0;
+    }
+
+    .key.nav-key {
+      background: linear-gradient(150deg, #f6faff, var(--blue-soft));
+      border-color: #a6c2e2;
+    }
+
+    .key.danger-key {
+      background: linear-gradient(150deg, #fff7f5, var(--red-soft));
+      border-color: #dcaaa3;
+    }
+
+    .key.transparent {
+      color: #9e9b94;
+      background: rgba(238,235,227,.82);
+      border-style: dashed;
+      box-shadow: none;
+    }
+
+    /* Exact S-layout coordinates from physical_layout_s (1450 × 500 units). */
+    .p0  { --x: 0%;      --y: 12%; }
+    .p1  { --x: 6.897%;  --y: 5%; }
+    .p2  { --x: 13.793%; --y: 0%; }
+    .p3  { --x: 20.690%; --y: 2.6%; }
+    .p4  { --x: 27.586%; --y: 5%; }
+    .p5  { --x: 65.517%; --y: 5%; }
+    .p6  { --x: 72.414%; --y: 2.6%; }
+    .p7  { --x: 79.310%; --y: 0%; }
+    .p8  { --x: 86.207%; --y: 5%; }
+    .p9  { --x: 93.103%; --y: 12%; }
+    .p10 { --x: 0%;      --y: 32%; }
+    .p11 { --x: 6.897%;  --y: 25%; }
+    .p12 { --x: 13.793%; --y: 20%; }
+    .p13 { --x: 20.690%; --y: 22.6%; }
+    .p14 { --x: 27.586%; --y: 25%; }
+    .p15 { --x: 65.517%; --y: 25%; }
+    .p16 { --x: 72.414%; --y: 22.6%; }
+    .p17 { --x: 79.310%; --y: 20%; }
+    .p18 { --x: 86.207%; --y: 25%; }
+    .p19 { --x: 93.103%; --y: 32%; }
+    .p20 { --x: 0%;      --y: 52%; }
+    .p21 { --x: 6.897%;  --y: 45%; }
+    .p22 { --x: 13.793%; --y: 40%; }
+    .p23 { --x: 20.690%; --y: 42.6%; }
+    .p24 { --x: 27.586%; --y: 45%; }
+    .p25 { --x: 34.483%; --y: 48%; }
+    .p26 { --x: 58.621%; --y: 48%; }
+    .p27 { --x: 65.517%; --y: 45%; }
+    .p28 { --x: 72.414%; --y: 42.6%; }
+    .p29 { --x: 79.310%; --y: 40%; }
+    .p30 { --x: 86.207%; --y: 45%; }
+    .p31 { --x: 93.103%; --y: 52%; }
+    .p32 { --x: 0%;      --y: 72%; }
+    .p33 { --x: 6.897%;  --y: 65%; }
+    .p34 { --x: 13.793%; --y: 60%; }
+    .p35 { --x: 21.724%; --y: 70%; }
+    .p36 { --x: 28.966%; --y: 70%;   --r: 10deg;  --ox: 0%;   --oy: 100%; }
+    .p37 { --x: 36%;     --y: 74.2%; --r: 20deg;  --ox: 3%;   --oy: 100%; }
+    .p38 { --x: 57.103%; --y: 74.2%; --r: -20deg; --ox: 97%;  --oy: 100%; }
+    .p39 { --x: 64.138%; --y: 70%;   --r: -10deg; --ox: 100%; --oy: 100%; }
+    .p40 { --x: 71.379%; --y: 70%; }
+    .p41 { --x: 79.310%; --y: 60%; }
+    .p42 { --x: 86.207%; --y: 65%; }
+    .p43 { --x: 93.103%; --y: 72%; }
+
+    .combo-link {
+      position: absolute;
+      z-index: 6;
+      left: var(--lx);
+      top: var(--ly);
+      width: var(--lw);
+      height: 0;
+      transform: rotate(var(--lr));
+      transform-origin: 0 50%;
+      border-top: 3px solid var(--combo-color);
+      filter: drop-shadow(0 1px 0 rgba(255,255,255,.7));
+      pointer-events: none;
+    }
+
+    .combo-link::before,
+    .combo-link::after {
+      content: "";
+      position: absolute;
+      top: -6px;
+      width: 8px;
+      height: 8px;
+      background: var(--combo-color);
+      border: 2px solid #fff;
+      border-radius: 50%;
+    }
+
+    .combo-link::before { left: -4px; }
+    .combo-link::after { right: -4px; }
+
+    .combo-link span {
+      position: absolute;
+      left: 50%;
+      padding: 3px 7px;
+      color: #fff;
+      background: var(--combo-color);
+      border: 2px solid #fff;
+      border-radius: 999px;
+      box-shadow: 0 3px 9px rgba(35,42,44,.2);
+      font-size: .61rem;
+      font-weight: 900;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .combo-link span {
+      top: 0;
+      transform: translate(-50%, -50%) rotate(var(--counter));
+    }
+
+    .link-jk {
+      --lx: 75.862%; --ly: 32.6%; --lw: 6.95%; --lr: -7.4deg; --counter: 7.4deg;
+      --combo-color: var(--teal);
+    }
+
+    .link-kl {
+      --lx: 82.759%; --ly: 30%; --lw: 7.11%; --lr: 14deg; --counter: -14deg;
+      --combo-color: var(--blue);
+    }
+
+    .link-hj {
+      --lx: 68.966%; --ly: 35%; --lw: 6.94%; --lr: -6.8deg; --counter: 6.8deg;
+      --combo-color: var(--violet);
+    }
+
+    .link-l-semi {
+      --lx: 89.655%; --ly: 35%; --lw: 7.31%; --lr: 19.3deg; --counter: -19.3deg;
+      --combo-color: var(--amber);
+    }
+
+    .link-comma-dot {
+      --lx: 82.759%; --ly: 50%; --lw: 7.11%; --lr: 14deg; --counter: -14deg;
+      --combo-color: var(--red);
+    }
+
+    .link-fg {
+      --lx: 24.138%; --ly: 32.6%; --lw: 6.94%; --lr: 6.8deg; --counter: -6.8deg;
+      --combo-color: var(--red);
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .legend span::before {
+      content: "";
+      display: inline-block;
+      width: 11px;
+      height: 11px;
+      margin-right: 6px;
+      vertical-align: -1px;
+      background: var(--legend-color);
+      border: 1px solid rgba(0,0,0,.12);
+      border-radius: 3px;
+    }
+
+    .scroll-flow {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .flow-step {
+      position: relative;
+      padding: 14px 14px 14px 50px;
+      background: var(--teal-soft);
+      border-radius: 13px;
+    }
+
+    .flow-step::before {
+      content: attr(data-step);
+      position: absolute;
+      left: 13px;
+      top: 13px;
+      display: grid;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      color: #fff;
+      background: var(--teal);
+      border-radius: 50%;
+      font-weight: 900;
+    }
+
+    .flow-step b { display: block; }
+
+    .note-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .note {
+      padding: 13px 15px;
+      background: #f7f4ed;
+      border-left: 4px solid var(--teal);
+      border-radius: 8px;
+    }
+
+    .note b { display: block; }
+
+    .quick-table {
+      width: 100%;
+      overflow: hidden;
+      border-collapse: collapse;
+      background: #fffdf8;
+      border-radius: 14px;
+    }
+
+    .quick-table th,
+    .quick-table td {
+      padding: 11px 13px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+
+    .quick-table th {
+      color: var(--muted);
+      background: #efebe3;
+      font-size: .76rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .quick-table tr:last-child td { border-bottom: 0; }
+    .quick-table td:first-child { width: 32%; font-weight: 900; }
+
+    kbd {
+      display: inline-grid;
+      min-width: 29px;
+      min-height: 29px;
+      padding: 4px 7px;
+      place-items: center;
+      color: var(--ink);
+      background: linear-gradient(var(--key-top), var(--key-bottom));
+      border: 1px solid var(--key-border);
+      border-bottom-width: 3px;
+      border-radius: 7px;
+      font-weight: 900;
+      line-height: 1;
+    }
+
+    code {
+      padding: .12em .36em;
+      background: rgba(105,82,163,.11);
+      border-radius: 5px;
+      font-family: "Cascadia Mono", Consolas, monospace;
+      font-size: .9em;
+    }
+
+    footer {
+      padding: 26px 8px 0;
+      color: var(--muted);
+      font-size: .79rem;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .page { width: calc(100% - 16px); padding-top: 8px; }
+      .hero, .panel { padding: 21px 17px; border-radius: 18px; }
+      .print-button { position: static; margin-top: 16px; }
+      .section-head { align-items: start; flex-direction: column; }
+      .scroll-flow, .note-grid { grid-template-columns: 1fr; }
+      .quick-table th, .quick-table td { padding: 9px 7px; font-size: .8rem; }
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #111716;
+        --paper: rgba(28,36,35,.9);
+        --ink: #edf4f2;
+        --muted: #aeb8b6;
+        --line: #3b4745;
+        --key-top: #35403f;
+        --key-bottom: #252e2d;
+        --key-border: #596462;
+        --teal-soft: #173f3b;
+        --blue-soft: #273b51;
+        --amber-soft: #4a3618;
+        --violet-soft: #3d3457;
+        --red-soft: #4b2e2c;
+      }
+      nav { background: rgba(28,36,35,.9); }
+      .physical-board { background: #19201f; }
+      .key.transparent { background: #242b2a; }
+      .note { background: #242d2c; }
+      .quick-table { background: #1f2726; }
+      .quick-table th { background: #293231; }
+    }
+
+    @media print {
+      :root {
+        color-scheme: light;
+        --bg: #fff; --paper: #fff; --ink: #111; --muted: #555; --line: #bbb;
+        --key-top: #fff; --key-bottom: #eee; --key-border: #aaa;
+        --teal-soft: #ddf4ef; --blue-soft: #e5f1ff; --amber-soft: #fff0cf;
+        --violet-soft: #eee8ff; --red-soft: #ffe7e2;
+      }
+      @page { size: A4 landscape; margin: 7mm; }
+      body { background: #fff; font-size: 8pt; }
+      .page { width: 100%; padding: 0; }
+      .hero { padding: 16px 20px; background: #146e68 !important; box-shadow: none; print-color-adjust: exact; }
+      .hero h1 { font-size: 24pt; }
+      .print-button, nav { display: none; }
+      .panel { padding: 14px; box-shadow: none; break-inside: avoid; }
+      .physical-board { min-width: 0; print-color-adjust: exact; }
+      .key, .combo-link, .flow-step { print-color-adjust: exact; }
+      .key { font-size: 7pt; }
+      .key small, .combo-link span { font-size: 5pt; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <header class="hero">
+      <p class="eyebrow">torabo-tsuki LP · S physical layout</p>
+      <h1>Keymap Cheat Sheet</h1>
+      <p class="hero-copy">実機の段差・中央間隔・親指キー角度に沿った物理配置。コンボは、対応する2キーを結ぶ線として盤面上に表示しています。</p>
+      <button class="print-button" type="button" onclick="window.print()">印刷する</button>
+    </header>
+
+    <nav aria-label="ページ内ナビゲーション">
+      <a href="#base">Base + Combo</a>
+      <a href="#layer2">Layer 2</a>
+      <a href="#layer3">Layer 3</a>
+      <a href="#quick">早見表</a>
+    </nav>
+
+    <section class="panel" id="base">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Layer 0 + mouse combos</p>
+          <h2>ベース／マウス操作</h2>
+        </div>
+        <p class="hint">線上のラベルがコンボ動作</p>
+      </div>
+
+      <div class="board-scroll">
+        <div class="physical-board" aria-label="Sレイアウトのベースキー配列とマウスコンボ">
+          <div class="key p0">Q</div><div class="key p1">W</div><div class="key p2">E</div><div class="key p3">R</div><div class="key p4">T</div>
+          <div class="key p5">Y</div><div class="key p6">U</div><div class="key p7">I</div><div class="key p8">O</div><div class="key p9">P</div>
+          <div class="key p10">A</div><div class="key p11">S</div><div class="key p12">D</div><div class="key p13">F</div><div class="key p14">G</div>
+          <div class="key p15 combo-key">H</div><div class="key p16 combo-key">J</div><div class="key p17 combo-key">K</div><div class="key p18 combo-key">L</div><div class="key p19 combo-key">;</div>
+          <div class="key p20">Z</div><div class="key p21">X</div><div class="key p22">C</div><div class="key p23">V</div><div class="key p24">B</div><div class="key p25">Space</div>
+          <div class="key p26">Enter</div><div class="key p27">N</div><div class="key p28">M</div><div class="key p29 combo-key">,</div><div class="key p30 combo-key">.</div><div class="key p31 mod-key">/<small>hold RSft</small></div>
+          <div class="key p32 mod-key">LCtrl</div><div class="key p33 mod-key">LGui</div><div class="key p34 mod-key">LAlt</div><div class="key p35">Bspc</div>
+          <div class="key p36 layer-key">Space<small>hold L2</small></div><div class="key p37 mod-key">IME<small>hold LSft</small></div>
+          <div class="key p38 layer-key">IME<small>hold L2</small></div><div class="key p39 layer-key">Enter<small>hold L3</small></div>
+          <div class="key p40">Bspc</div><div class="key p41 mod-key">RAlt</div><div class="key p42 mod-key">RGui</div><div class="key p43 mod-key">RCtrl</div>
+
+          <div class="combo-link link-hj"><span>戻る</span></div>
+          <div class="combo-link link-jk"><span>左Click</span></div>
+          <div class="combo-link link-kl"><span>右Click</span></div>
+          <div class="combo-link link-l-semi"><span>Scroll</span></div>
+          <div class="combo-link link-comma-dot"><span>進む</span></div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span style="--legend-color: var(--teal-soft)">コンボ対象</span>
+        <span style="--legend-color: var(--amber-soft)">レイヤーキー</span>
+        <span style="--legend-color: var(--violet-soft)">修飾／IME</span>
+      </div>
+
+      <div class="scroll-flow" aria-label="ワンショットスクロールの手順">
+        <div class="flow-step" data-step="1"><b>L ＋ ; を一度タップ</b>両キーから手を離す</div>
+        <div class="flow-step" data-step="2"><b>ボールを動かす</b>上下＝縦、左右＝横スクロール</div>
+        <div class="flow-step" data-step="3"><b>キーで解除</b>次の通常キーまで時間制限なし</div>
+      </div>
+    </section>
+
+    <section class="panel" id="layer2">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Layer 2 · symbols / numbers</p>
+          <h2>記号・数字</h2>
+        </div>
+        <p class="hint">左 Space/L2 または右 IME/L2 をホールド</p>
+      </div>
+
+      <div class="board-scroll">
+        <div class="physical-board" aria-label="SレイアウトのLayer 2キー配列">
+          <div class="key p0 layer-key">!</div><div class="key p1 layer-key">@</div><div class="key p2 layer-key">#</div><div class="key p3 layer-key">$</div><div class="key p4 layer-key">%</div>
+          <div class="key p5 layer-key">^</div><div class="key p6 layer-key">&amp;</div><div class="key p7 layer-key">*</div><div class="key p8 layer-key">(</div><div class="key p9 layer-key">)</div>
+          <div class="key p10">1</div><div class="key p11">2</div><div class="key p12">3</div><div class="key p13 danger-key">0</div><div class="key p14 transparent">—</div>
+          <div class="key p15 layer-key">{</div><div class="key p16 layer-key">−</div><div class="key p17 layer-key">=</div><div class="key p18 layer-key">}</div><div class="key p19 layer-key">:</div>
+          <div class="key p20">4</div><div class="key p21">5</div><div class="key p22">6</div><div class="key p23 transparent">—</div><div class="key p24 transparent">—</div><div class="key p25 transparent">—</div>
+          <div class="key p26 layer-key">LGTM!!</div><div class="key p27 layer-key">_</div><div class="key p28 layer-key">+</div><div class="key p29 layer-key">[</div><div class="key p30 layer-key">]</div><div class="key p31 layer-key">\</div>
+          <div class="key p32">7</div><div class="key p33">8</div><div class="key p34">9</div><div class="key p35 transparent">—</div>
+          <div class="key p36 transparent">—</div><div class="key p37 transparent">—</div><div class="key p38 transparent">—</div><div class="key p39 nav-key">Tab</div>
+          <div class="key p40 nav-key">Del</div><div class="key p41 transparent">—</div><div class="key p42 transparent">—</div><div class="key p43 transparent">—</div>
+
+          <div class="combo-link link-fg"><span>BT Clear · F＋G</span></div>
+        </div>
+      </div>
+
+      <div class="note-grid">
+        <div class="note"><b>数字配置</b><code>1–3</code> は左ホーム段、<code>4–6</code> は左下段、<code>7–9</code> は左外側の親指列です。</div>
+        <div class="note"><b>Bluetoothクリア</b>物理キー <kbd>F</kbd> ＋ <kbd>G</kbd>。盤面上では赤い線で表示しています。</div>
+      </div>
+    </section>
+
+    <section class="panel" id="layer3">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Layer 3 · function / navigation</p>
+          <h2>ファンクション・ナビ</h2>
+        </div>
+        <p class="hint">右 Enter/L3 をホールド</p>
+      </div>
+
+      <div class="board-scroll">
+        <div class="physical-board" aria-label="SレイアウトのLayer 3キー配列">
+          <div class="key p0 nav-key">F1</div><div class="key p1 nav-key">F2</div><div class="key p2 nav-key">F3</div><div class="key p3 nav-key">F4</div><div class="key p4 nav-key">F5</div>
+          <div class="key p5 nav-key">Home</div><div class="key p6 nav-key">PgUp</div><div class="key p7 nav-key">PgDn</div><div class="key p8 nav-key">End</div><div class="key p9 nav-key">Esc</div>
+          <div class="key p10 nav-key">F6</div><div class="key p11 nav-key">F7</div><div class="key p12 nav-key">F8</div><div class="key p13 nav-key">F9</div><div class="key p14 nav-key">F10</div>
+          <div class="key p15 nav-key">←</div><div class="key p16 nav-key">↓</div><div class="key p17 nav-key">↑</div><div class="key p18 nav-key">→</div><div class="key p19 nav-key">Tab</div>
+          <div class="key p20 nav-key">F11</div><div class="key p21 nav-key">F12</div><div class="key p22 nav-key">USB</div><div class="key p23 nav-key">BLE</div><div class="key p24 nav-key">BT→</div><div class="key p25 danger-key">BT Clear</div>
+          <div class="key p26 transparent">—</div><div class="key p27">'</div><div class="key p28">"</div><div class="key p29">`</div><div class="key p30">~</div><div class="key p31">|</div>
+          <div class="key p32 transparent">—</div><div class="key p33 transparent">—</div><div class="key p34 transparent">—</div><div class="key p35 nav-key">Del</div>
+          <div class="key p36 nav-key">Tab</div><div class="key p37 transparent">—</div><div class="key p38 transparent">—</div><div class="key p39 transparent">—</div>
+          <div class="key p40 transparent">—</div><div class="key p41 transparent">—</div><div class="key p42 transparent">—</div><div class="key p43 transparent">—</div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span style="--legend-color: var(--blue-soft)">ファンクション／ナビ</span>
+        <span style="--legend-color: var(--red-soft)">接続解除</span>
+        <span style="--legend-color: #efebe3">透過</span>
+      </div>
+    </section>
+
+    <section class="panel" id="quick">
+      <div class="section-head">
+        <div>
+          <p class="section-label">Quick reference</p>
+          <h2>操作早見表</h2>
+        </div>
+      </div>
+      <table class="quick-table">
+        <thead><tr><th>動作</th><th>操作</th></tr></thead>
+        <tbody>
+          <tr><td>左クリック／ドラッグ</td><td><kbd>J</kbd> ＋ <kbd>K</kbd>／押したままボール移動</td></tr>
+          <tr><td>右クリック</td><td><kbd>K</kbd> ＋ <kbd>L</kbd></td></tr>
+          <tr><td>スクロール</td><td><kbd>L</kbd> ＋ <kbd>;</kbd> を一度タップしてボール移動（次の通常キーまで時間制限なし）</td></tr>
+          <tr><td>戻る／進む</td><td><kbd>H</kbd> ＋ <kbd>J</kbd> ／ <kbd>,</kbd> ＋ <kbd>.</kbd></td></tr>
+          <tr><td>IME切替</td><td>左右いずれかの親指 <kbd>IME</kbd> をタップ</td></tr>
+          <tr><td>記号・数字</td><td>左 Space/L2、または右 IME/L2 をホールド</td></tr>
+          <tr><td>Fキー・矢印</td><td>右 Enter/L3 をホールド</td></tr>
+          <tr><td>Bluetoothクリア</td><td>Layer 2で物理キー <kbd>F</kbd> ＋ <kbd>G</kbd></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer>
+      Physical coordinates: <code>physical_layout_s</code> · Bindings: device backup JSON · Combo positions: S layout indices
+    </footer>
+  </main>
+</body>
+</html>

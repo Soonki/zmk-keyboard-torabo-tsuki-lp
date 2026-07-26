@@ -15,7 +15,7 @@
     // DYA Studio から速度/回転を調整できる。
     input-processors = <&mouse_runtime_input_processor>;
 
-    // H + L コンボでワンショット layer_4 が有効な間、移動を1/6に減速してスクロールへ変換
+    // L + ; コンボでワンショット layer_4 が有効な間、移動を1/6に減速してスクロールへ変換
     scroller {
         layers = <4>;
         input-processors = <&zip_xy_scaler 1 6>, <&zip_xy_to_scroll_mapper>;
