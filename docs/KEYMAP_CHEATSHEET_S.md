@@ -23,6 +23,7 @@
 - `L3/Ent` = `&lt 3 ENTER`（タップ=Enter、ホールド=Layer 3）
 - 左 `IME/LSft` = `&mt LSHFT LC(SPACE)`（タップ=`左Ctrl+Space`、ホールド=左Shift）
 - 右 `IME/L2` = `&lt 2 RC(SPACE)`（タップ=`右Ctrl+Space`、ホールド=Layer 2）
+- 右親指の左側2キー `IME/L2` + `L3/Ent` = `Ctrl+Enter` コンボ
 
 > **IME切替**: 左右いずれかの内側親指 `IME` をタップ。OS側で `Ctrl+Space` を入力言語切替に設定して使用します。
 
@@ -112,6 +113,7 @@
 | やりたいこと | 操作 |
 |---|---|
 | IMEを切り替える | 左右いずれかの親指 `IME` をタップ |
+| Ctrl+Enter | 右親指の左側2キー `IME/L2` + `L3/Ent` を同時押し |
 | マウス移動 | トラックボールを動かす |
 | 左クリック | `J` + `K` |
 | 右クリック | `K` + `L` |

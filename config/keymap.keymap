@@ -25,6 +25,14 @@
             layers = <2>;
         };
 
+        // Ctrl+Enter：右親指の左側2キー（IME/L2 + L3/Enter）
+        combo_ctrl_enter {
+            bindings = <&kp LC(ENTER)>;
+            key-positions = <38 39>;
+            layers = <0>;
+            timeout-ms = <50>;
+        };
+
         // === マウス操作コンボ（右手ホームロー隣接） ===
         // timeout-ms を短く、require-prior-idle-ms でタイピング直後の誤爆を防止
 
